@@ -1,0 +1,30 @@
+services:
+  customer-api:
+    build:
+      context: ./customer-api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: customer-api
+    restart: unless-stopped
+    ports:
+      - "81:8080"
+  
+  product-api:
+    build:
+      context: ./product-api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: product-api
+    restart: unless-stopped
+    ports:
+      - "82:8080"
+
+  report-api:
+    build:
+      context: ./report-api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: report-api
+    restart: unless-stopped
+    ports:
+      - "83:8080"
