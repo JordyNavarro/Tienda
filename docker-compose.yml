@@ -19,12 +19,12 @@ services:
     ports:
       - "82:8080"
 
-  report-api:
+  sale-api:
     build:
-      context: ./report-api
+      context: ./sale-api
       dockerfile: Dockerfile
     #image: nodejs
-    container_name: report-api
+    container_name: sale-api
     restart: unless-stopped
     ports:
       - "83:8080"
