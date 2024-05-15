@@ -13,12 +13,12 @@ app.get('/', (req, res) => {
     res.send('Bienvenido al api de product api');
 });
 
-app.get('/productos', async (req, res)=> {
+app.get('/products', async (req, res)=> {
     const products = await productModel.find({});
     res.json(products);
 });
 
-app.get('/products/:code', async (req, res)=> {
+app.get('/product/:code', async (req, res)=> {
     const product = await productModel.find({code:req.params.code});
     res.json(product);
 });

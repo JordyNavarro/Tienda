@@ -38,6 +38,34 @@ app.post('/addcustomer', async (req, res)=> {
     }
 });
 
+app.put('/updatecustomer/:id', async (req, res) => {
+    const customerId = req.params.id;
+    const { dni, name, lastname } = req.body;
+
+    try {
+        // Busca el cliente existente por ID
+        const customer = await customerModel.findById(customerId);
+
+        if (!customer) {
+            return res.status(404).json({ message: 'Cliente no encontrado' });
+        }
+
+        // Actualiza los campos con los nuevos datos
+        customer.dni = dni;
+        customer.name = name;
+        customer.lastname = lastname;
+
+        // Guarda los cambios en la base de datos
+        const updatedCustomer = await customer.save();
+
+        return res.status(200).json(updatedCustomer);
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Error interno: ' + error });
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });
