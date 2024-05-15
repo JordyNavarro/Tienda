@@ -66,6 +66,29 @@ app.put('/updatecustomer/:id', async (req, res) => {
 });
 
 
+app.delete('/deletecustomer/:id', async (req, res) => {
+    const customerId = req.params.id;
+
+    try {
+        // Busca el cliente existente por ID
+        const customer = await customerModel.findById(customerId);
+
+        if (!customer) {
+            return res.status(404).json({ message: 'Cliente no encontrado' });
+        }
+
+        // Elimina el cliente de la base de datos
+        await customer.remove();
+
+        return res.status(200).json({ message: 'Cliente eliminado correctamente' });
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Error interno: ' + error });
+    }
+});
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });
