@@ -70,15 +70,12 @@ app.delete('/deletecustomer/:id', async (req, res) => {
     const customerId = req.params.id;
 
     try {
-        // Busca el cliente existente por ID
-        const customer = await customerModel.findById(customerId);
+        // Elimina el cliente de la base de datos
+        const result = await customerModel.deleteOne({ _id: customerId });
 
-        if (!customer) {
+        if (result.deletedCount === 0) {
             return res.status(404).json({ message: 'Cliente no encontrado' });
         }
-
-        // Elimina el cliente de la base de datos
-        await customer.remove();
 
         return res.status(200).json({ message: 'Cliente eliminado correctamente' });
     } catch (error) {
@@ -86,6 +83,7 @@ app.delete('/deletecustomer/:id', async (req, res) => {
         return res.status(500).json({ message: 'Error interno: ' + error });
     }
 });
+
 
 
 
