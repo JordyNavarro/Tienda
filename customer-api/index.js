@@ -1,5 +1,5 @@
 const express = require("express");
-const uri = 'mongodb+srv://ricoybarato2024:alvaro1560@tiendabd.uvlqd42.mongodb.net/'
+const uri = 'mongodb+srv://ricoybarato2024:alvaro1560@tiendabd.uvlqd42.mongodb.net/?retryWrites=true&w=majority&appName=tiendaBD'
 
 const mongoose = require('mongoose');
 mongoose.connect(uri);
@@ -23,7 +23,8 @@ app.get('/customers/:dni', async (req, res)=> {
     res.json(customer);
 });
 
-app.post('addcustomer', async (req, res)=> {
+app.post('/addcustomer', async (req, res)=> {
+    console.log(req.body)
     try{
         const dni = req.body.dni;
         const name = req.body.name;
